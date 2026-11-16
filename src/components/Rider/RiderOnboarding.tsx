@@ -561,7 +561,7 @@ export const RiderOnboarding: React.FC<RiderOnboardingProps> = ({
             {language === 'en' ? 'Code sent to' : 'An aika lambar zuwa'} <span className="font-semibold text-[#14201A]">+234 {phone}</span>
           </p>
 
-          {/* Amber Sandbox Dev Banner */}
+          {/* Campus Pilot / Instant Verification Banner */}
           {effectiveSandboxCode && (
             <div className="my-3 p-3.5 bg-[#FFF8E6] border border-[#E69500]/40 rounded-2xl text-left animate-fadeIn shadow-xs">
               <div className="flex items-center justify-between gap-3">
@@ -571,7 +571,7 @@ export const RiderOnboarding: React.FC<RiderOnboardingProps> = ({
                   </div>
                   <div>
                     <h4 className="font-bold text-[11px] text-[#8A5A00] uppercase tracking-wide">
-                      Local Dev Sandbox Mode
+                      Campus Pilot Verification
                     </h4>
                     <p className="text-xs text-[#8A5A00]/90 mt-0.5">
                       Your code: <strong className="font-mono text-sm tracking-widest text-[#8A5A00] font-black">{effectiveSandboxCode}</strong>

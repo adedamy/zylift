@@ -168,14 +168,42 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Listen for PWA beforeinstallprompt
+  // Listen for PWA beforeinstallprompt & trigger install modal for mobile users
   useEffect(() => {
+    let timer: any = null;
+
     const handleBeforeInstall = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
+      // Auto-display modal after brief pause if not already standalone and not dismissed
+      const isStandaloneMode =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        (window.navigator as any).standalone === true;
+      const dismissed = sessionStorage.getItem('zylift_install_dismissed') === 'true';
+      if (!isStandaloneMode && !dismissed) {
+        timer = setTimeout(() => setShowInstallModal(true), 1500);
+      }
     };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+
+    // Fallback: If on mobile browser (Android / iOS) and not running standalone, show install prompt after splash
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandaloneMode =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true;
+    const dismissed = sessionStorage.getItem('zylift_install_dismissed') === 'true';
+
+    if (isMobile && !isStandaloneMode && !dismissed) {
+      timer = setTimeout(() => {
+        setShowInstallModal(true);
+      }, 3500);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   // Update role and update hash
@@ -365,6 +393,7 @@ export default function App() {
                   try {
                     localStorage.removeItem('zylift_driver_user');
                     localStorage.removeItem('zylift_driver_token');
+                    localStorage.removeItem('zylift_driver_online');
                     localStorage.removeItem('zylift_last_role');
                   } catch (e) {}
                   handleRoleChange('driver_signin');
@@ -428,7 +457,12 @@ export default function App() {
       {/* PWA Install App Modal */}
       <InstallAppModal
         isOpen={showInstallModal}
-        onClose={() => setShowInstallModal(false)}
+        onClose={() => {
+          try {
+            sessionStorage.setItem('zylift_install_dismissed', 'true');
+          } catch (e) {}
+          setShowInstallModal(false);
+        }}
         deferredPrompt={deferredPrompt}
       />
     </div>

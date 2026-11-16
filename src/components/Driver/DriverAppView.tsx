@@ -248,6 +248,12 @@ export const DriverAppView: React.FC<DriverAppViewProps> = ({ onSignOut }) => {
           if (updated.isApproved) {
             setShowApprovalNotice(false);
           }
+          if (typeof updated.isOnline === 'boolean') {
+            setIsOnline(updated.isOnline);
+            try {
+              localStorage.setItem('zylift_driver_online', String(updated.isOnline));
+            } catch (e) {}
+          }
           return updated;
         }
       }
@@ -270,8 +276,19 @@ export const DriverAppView: React.FC<DriverAppViewProps> = ({ onSignOut }) => {
     };
   }, [driver?.id, driver?.phone, driver?.isApproved]);
 
-  // State Machine
-  const [isOnline, setIsOnline] = useState(false); // Starts in D2 (Offline)
+  // State Machine - restore saved online status so refreshing keeps driver online
+  const [isOnline, setIsOnline] = useState<boolean>(() => {
+    try {
+      const savedOnline = localStorage.getItem('zylift_driver_online');
+      if (savedOnline !== null) return savedOnline === 'true';
+      const cached = localStorage.getItem('zylift_driver_user');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (typeof parsed.isOnline === 'boolean') return parsed.isOnline;
+      }
+    } catch {}
+    return false;
+  });
   const [incomingOffer, setIncomingOffer] = useState<any>(null); // D4
   const [secondsRemaining, setSecondsRemaining] = useState(15);
   const [activeTrip, setActiveTrip] = useState<any>(null);
@@ -926,6 +943,7 @@ export const DriverAppView: React.FC<DriverAppViewProps> = ({ onSignOut }) => {
       if (data.needsVerification || (!data.success && data.error?.toLowerCase().includes('unverified'))) {
         setShowApprovalNotice(true);
         setIsOnline(false);
+        try { localStorage.setItem('zylift_driver_online', 'false'); } catch {}
         return;
       }
 
@@ -935,6 +953,9 @@ export const DriverAppView: React.FC<DriverAppViewProps> = ({ onSignOut }) => {
       }
 
       setIsOnline(targetState);
+      try {
+        localStorage.setItem('zylift_driver_online', String(targetState));
+      } catch {}
       if (targetState) {
         setShowApprovalNotice(false);
       }
@@ -943,9 +964,13 @@ export const DriverAppView: React.FC<DriverAppViewProps> = ({ onSignOut }) => {
       if (targetState && !driver?.isApproved) {
         setShowApprovalNotice(true);
         setIsOnline(false);
+        try { localStorage.setItem('zylift_driver_online', 'false'); } catch {}
         return;
       }
       setIsOnline(targetState);
+      try {
+        localStorage.setItem('zylift_driver_online', String(targetState));
+      } catch {}
     }
   };
 

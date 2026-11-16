@@ -491,7 +491,7 @@ export const DriverSignUpFlow: React.FC<DriverSignUpFlowProps> = ({
                   </div>
                   <div>
                     <h4 className="font-bold text-[11px] text-[#8A5A00] uppercase tracking-wide">
-                      Local Dev Sandbox Mode
+                      Campus Pilot Verification
                     </h4>
                     <p className="text-xs text-[#8A5A00]/90 mt-0.5">
                       Driver code: <strong className="font-mono text-sm tracking-widest text-[#8A5A00] font-black">{debugOtpHint || '123456'}</strong>

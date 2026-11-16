@@ -1343,8 +1343,13 @@ app.post('/api/auth/otp/send', async (req, res) => {
      smsResult.error.toLowerCase().includes('route'))
   );
 
-  // In local development / sandbox mode, return sandboxCode so developers and testers can 1-tap autofill
-  const isDevSandbox = process.env.NODE_ENV !== 'production';
+  // In local development, pilot testing, or when SMS sender is pending telco approval,
+  // return sandboxCode so riders and drivers can 1-tap autofill directly on mobile or web.
+  const isDevSandbox =
+    process.env.NODE_ENV !== 'production' ||
+    process.env.ENABLE_PILOT_OTP_FALLBACK === 'true' ||
+    !smsResult.success ||
+    isSenderPending;
   return res.status(200).json({
     success: true,
     expiresAt: result.expiresAt,
