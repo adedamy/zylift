@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="og" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E67E22"/>
+      <stop offset="100%" stop-color="#D35400"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="60" fill="url(#og)"/>
+  <circle cx="60" cy="46" r="22" fill="#FDF2E9"/>
+  <path d="M26 102 C26 78 40 68 60 68 C80 68 94 78 94 102 Z" fill="#FDF2E9"/>
+  <circle cx="60" cy="44" r="16" fill="#D35400"/>
+  <rect x="42" y="92" width="36" height="14" rx="7" fill="#14201A"/>
+  <text x="60" y="102" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">OKADA</text>
+</svg>

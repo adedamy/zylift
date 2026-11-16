@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="kg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E7C3A"/>
+      <stop offset="100%" stop-color="#0A5A2A"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="60" fill="url(#kg)"/>
+  <circle cx="60" cy="46" r="22" fill="#E6F4EC"/>
+  <path d="M26 102 C26 78 40 68 60 68 C80 68 94 78 94 102 Z" fill="#E6F4EC"/>
+  <circle cx="60" cy="44" r="16" fill="#0E7C3A"/>
+  <rect x="44" y="92" width="32" height="14" rx="7" fill="#E6B800"/>
+  <text x="60" y="102" font-family="system-ui, sans-serif" font-size="9" font-weight="900" fill="#14201A" text-anchor="middle">KEKE</text>
+</svg>

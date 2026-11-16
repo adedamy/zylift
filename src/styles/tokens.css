@@ -1,0 +1,210 @@
+/* Zylift Design Tokens - FUTMINNA Campus Pilot */
+:root {
+  /* Brand & Vehicle Colors */
+  --color-primary: #0E7C3A;
+  --color-primary-dark: #0A5C2B;
+  --color-primary-tint: #E6F4EC;
+  --color-keke: #F5B800;
+  --color-okada: #F26A1B;
+  --color-car: #2563EB;
+
+  /* Neutrals */
+  --color-ink: #14201A;
+  --color-grey-700: #3E4A43;
+  --color-grey-500: #7A857F;
+  --color-grey-200: #DDE3DF;
+  --color-grey-100: #F3F6F4;
+  --color-white: #FFFFFF;
+
+  /* Status */
+  --color-success: #1B9E4B;
+  --color-warning: #E69500;
+  --color-danger: #D93A3A;
+
+  /* Typography Scale */
+  --font-display: 28px;
+  --lh-display: 34px;
+  --font-heading: 22px;
+  --lh-heading: 28px;
+  --font-subheading: 18px;
+  --lh-subheading: 24px;
+  --font-body: 16px;
+  --lh-body: 24px;
+  --font-caption: 13px;
+  --lh-caption: 18px;
+  --font-fare: 32px;
+  --lh-fare: 36px;
+
+  /* Sizing & Radius */
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --radius-btn: 14px;
+  --btn-height: 56px;
+  --touch-target-min: 48px;
+}
+
+/* Base Utility Classes */
+.bg-kerb-primary { background-color: var(--color-primary); }
+.bg-kerb-dark { background-color: var(--color-primary-dark); }
+.bg-kerb-tint { background-color: var(--color-primary-tint); }
+.text-kerb-primary { color: var(--color-primary); }
+.border-kerb-primary { border-color: var(--color-primary); }
+
+.bg-kerb-ink { background-color: var(--color-ink); }
+.text-kerb-ink { color: var(--color-ink); }
+.text-kerb-grey700 { color: var(--color-grey-700); }
+.text-kerb-grey500 { color: var(--color-grey-500); }
+.bg-kerb-grey100 { background-color: var(--color-grey-100); }
+.border-kerb-grey200 { border-color: var(--color-grey-200); }
+
+.text-kerb-danger { color: var(--color-danger); }
+.bg-kerb-danger { background-color: var(--color-danger); }
+.border-kerb-danger { border-color: var(--color-danger); }
+
+.text-kerb-warning { color: var(--color-warning); }
+.bg-kerb-warning { background-color: var(--color-warning); }
+
+.text-kerb-success { color: var(--color-success); }
+.bg-kerb-success { background-color: var(--color-success); }
+
+/* Bottom Action Button (Rule 1: One main action per screen, 56dp height) */
+.kerb-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  background-color: #0E7C3A;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 14px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  user-select: none;
+  cursor: pointer;
+}
+.kerb-btn-primary:active {
+  background-color: #0A5C2B;
+  transform: scale(0.99);
+}
+.kerb-btn-primary:disabled {
+  background-color: #DDE3DF;
+  color: #7A857F;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary Button */
+.kerb-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  background-color: transparent;
+  color: #0E7C3A;
+  border: 1.5px solid #0E7C3A;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 14px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.kerb-btn-secondary:active {
+  background-color: #E6F4EC;
+}
+
+/* Danger Button */
+.kerb-btn-danger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  background-color: #D93A3A;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.kerb-btn-danger:active {
+  opacity: 0.9;
+}
+
+/* Standard Touch Targets */
+.touch-target {
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Radius Card */
+.kerb-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #DDE3DF;
+  padding: 16px;
+}
+
+/* Bottom Sheet Container */
+.kerb-sheet {
+  background-color: #FFFFFF;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+.kerb-sheet-handle {
+  width: 40px;
+  height: 4px;
+  background-color: #DDE3DF;
+  border-radius: 2px;
+  margin: 10px auto;
+}
+
+/* Status Chips */
+.kerb-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.kerb-chip-waiting { background-color: #FFF8E6; color: #E69500; }
+.kerb-chip-active { background-color: #EBF3FF; color: #2563EB; }
+.kerb-chip-completed { background-color: #E6F4EC; color: #1B9E4B; }
+.kerb-chip-danger { background-color: #FDE8E8; color: #D93A3A; }
+
+/* License Plate Box */
+.license-plate-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1.5px solid #14201A;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: monospace;
+  background: #FFF;
+  color: #14201A;
+}
+
+/* Large Safety PIN Box */
+.safety-pin-display {
+  display: inline-flex;
+  gap: 12px;
+  padding: 8px 16px;
+  background-color: #F3F6F4;
+  border-radius: 12px;
+  border: 1px solid #DDE3DF;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: #0E7C3A;
+  font-family: monospace;
+}

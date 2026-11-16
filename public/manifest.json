@@ -1,0 +1,33 @@
+{
+  "id": "/",
+  "name": "Zylift - FUTMINNA Campus Transit",
+  "short_name": "Zylift",
+  "description": "FUTMINNA campus ride-hailing with fixed flat fares, instant driver matching, Keke & Okada rides, and offline safety.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E7C3A",
+  "theme_color": "#0E7C3A",
+  "categories": ["travel", "navigation", "transportation", "maps"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

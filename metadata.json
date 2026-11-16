@@ -1,0 +1,6 @@
+{
+  "name": "Zylift - FUTMINNA Campus Transit",
+  "description": "FUTMINNA campus ride-hailing with fixed flat fares, instant driver matching, Keke & Okada rides, and student safety PINs.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

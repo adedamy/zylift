@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Zylift - FUTMINNA Campus Transit</title>
+    <meta name="description" content="FUTMINNA campus ride-hailing with fixed flat fares, instant driver matching, Keke & Okada rides, and student safety PINs." />
+    <meta property="og:title" content="Zylift - FUTMINNA Campus Transit" />
+    <meta property="og:description" content="FUTMINNA campus ride-hailing with fixed flat fares, instant driver matching, Keke & Okada rides, and student safety PINs." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0E7C3A" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Zylift" />
+    
+    <!-- PWA Web App Manifest for Google Play Store / Home Screen -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+
+    <!-- Leaflet CSS for real-time map rendering -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Anti-Blank Screen Recovery & Error Catcher -->
+    <script>
+      window.addEventListener('error', function(e) {
+        console.error('[Zylift Global Error]:', e.error || e.message);
+        setTimeout(function() {
+          var root = document.getElementById('root');
+          if (!root || root.children.length === 0) {
+            var banner = document.getElementById('zylift-recovery-banner');
+            if (!banner) {
+              banner = document.createElement('div');
+              banner.id = 'zylift-recovery-banner';
+              banner.style.cssText = 'position:fixed;inset:0;background:#0d1f16;color:#ffffff;display:flex;align-items:center;justify-content:center;padding:20px;font-family:sans-serif;z-index:999999;';
+              banner.innerHTML = '<div style="max-width:440px;width:100%;background:#153123;padding:24px;border-radius:18px;border:1px solid #235439;box-shadow:0 16px 36px rgba(0,0,0,0.5);text-align:center;"><div style="width:48px;height:48px;border-radius:14px;background:#0b6b45;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:18px;color:#fff;">Z</div><h3 style="margin:0 0 6px;color:#7ce0aa;font-size:18px;font-weight:800;">Zylift Reload</h3><p style="margin:0 0 16px;font-size:12px;color:#94a3b8;line-height:1.5;">Tap to refresh your browser cache and start Zylift.</p><button onclick="if(window.navigator&&navigator.serviceWorker){navigator.serviceWorker.getRegistrations().then(function(regs){for(var r of regs) r.unregister();});}if(window.caches){caches.keys().then(function(keys){for(var k of keys) caches.delete(k);});}try{localStorage.clear();sessionStorage.clear();}catch(x){}window.location.reload(true);" style="width:100%;padding:12px;background:#18aa6b;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;">Clear Cache &amp; Reload</button></div>';
+              document.body.appendChild(banner);
+            }
+          }
+        }, 800);
+      });
+    </script>
+  </head>
+  <body class="bg-slate-100 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
