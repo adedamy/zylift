@@ -127,6 +127,7 @@ export const DriverSignInFlow: React.FC<DriverSignInFlowProps> = ({
       if (data.token && data.driver) {
         localStorage.setItem('zylift_driver_token', data.token);
         localStorage.setItem('zylift_driver_user', JSON.stringify(data.driver));
+        localStorage.setItem('zylift_last_role', 'driver');
         onDriverSignedIn(data.driver);
         return;
       }
@@ -148,6 +149,7 @@ export const DriverSignInFlow: React.FC<DriverSignInFlowProps> = ({
             localStorage.setItem('zylift_driver_token', signInData.token);
           }
           localStorage.setItem('zylift_driver_user', JSON.stringify(signInData.driver));
+          localStorage.setItem('zylift_last_role', 'driver');
           onDriverSignedIn(signInData.driver);
           return;
         }

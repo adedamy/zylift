@@ -66,10 +66,16 @@ export default function App() {
       return 'rider';
     }
 
-    // Check if user has an active rider session in localStorage
+    // Check if user has an active session in localStorage (WhatsApp-style instant return)
     try {
-      const saved = localStorage.getItem('zylift_rider_user');
-      if (saved) return 'rider';
+      const lastRole = localStorage.getItem('zylift_last_role');
+      const savedDriver = localStorage.getItem('zylift_driver_user');
+      const savedRider = localStorage.getItem('zylift_rider_user');
+
+      if (lastRole === 'driver' && savedDriver) return 'driver';
+      if (lastRole === 'rider' && savedRider) return 'rider';
+      if (savedDriver && !savedRider) return 'driver';
+      if (savedRider) return 'rider';
     } catch (e) {}
 
     return 'role_select';
@@ -178,6 +184,14 @@ export default function App() {
     setRiderSecondaryScreen(null);
     setRiderSideMenuOpen(false);
 
+    try {
+      if (role === 'rider' || role === 'driver') {
+        localStorage.setItem('zylift_last_role', role);
+      } else if (role === 'role_select') {
+        localStorage.removeItem('zylift_last_role');
+      }
+    } catch (e) {}
+
     const hash =
       role === 'role_select' ? '#welcome' :
       role === 'driver' ? '#driver' :
@@ -197,6 +211,7 @@ export default function App() {
     if (user) {
       try {
         localStorage.setItem('zylift_rider_user', JSON.stringify(user));
+        localStorage.setItem('zylift_last_role', 'rider');
       } catch (e) {}
     } else {
       try {
@@ -350,6 +365,7 @@ export default function App() {
                   try {
                     localStorage.removeItem('zylift_driver_user');
                     localStorage.removeItem('zylift_driver_token');
+                    localStorage.removeItem('zylift_last_role');
                   } catch (e) {}
                   handleRoleChange('driver_signin');
                 }}
@@ -372,6 +388,7 @@ export default function App() {
                 if (driverData) {
                   try {
                     localStorage.setItem('zylift_driver_user', JSON.stringify(driverData));
+                    localStorage.setItem('zylift_last_role', 'driver');
                   } catch (e) {}
                 }
                 handleRoleChange('driver');
