@@ -16,6 +16,7 @@ import {
 } from './components/Rider/RiderSecondaryScreens';
 import { InstallAppModal } from './components/Modals/InstallAppModal';
 import { RoleSelectionScreen } from './components/Auth/RoleSelectionScreen';
+import { SplashScreen } from './components/Common/SplashScreen';
 import { Smartphone, Car, LayoutDashboard, Share2, Download, UserCheck, X as CloseIcon } from 'lucide-react';
 
 // Lazy-loaded role applications for optimized initial bundle load
@@ -80,6 +81,7 @@ export default function App() {
 
   const [activeRole, setActiveRole] = useState<AppRole>(getInitialRole);
   const [shareToken, setShareToken] = useState<string>(initialShareToken || 'sh_hbrrklvv');
+  const [showSplash, setShowSplash] = useState<boolean>(true);
 
   // Rider User Profile - clean start from localStorage
   const [riderUser, setRiderUser] = useState<RiderUserProfile | null>(() => {
@@ -224,17 +226,29 @@ export default function App() {
           </div>
         }>
         {/* ============================================================== */}
-        {/* 0. ROLE SELECTION SCREEN (PASSENGER OR DRIVER) */}
+        {/* 0. BRAND SPLASH SCREEN (AUTOPLAYS FOR 2.5 SECONDS ON LAUNCH) */}
         {/* ============================================================== */}
-        {activeRole === 'role_select' && (
+        {showSplash && activeRole !== 'admin' && activeRole !== 'trip_share' ? (
           <KerbMobileFrame>
-            <RoleSelectionScreen
-              onSelectPassenger={() => handleRoleChange('rider')}
-              onSelectDriverRegister={() => handleRoleChange('driver_signup')}
-              onSelectDriverSignIn={() => handleRoleChange('driver_signin')}
+            <SplashScreen
+              durationMs={2500}
+              onFinish={() => setShowSplash(false)}
             />
           </KerbMobileFrame>
-        )}
+        ) : (
+          <>
+            {/* ============================================================== */}
+            {/* 0. ROLE SELECTION SCREEN (PASSENGER OR DRIVER) */}
+            {/* ============================================================== */}
+            {activeRole === 'role_select' && (
+              <KerbMobileFrame>
+                <RoleSelectionScreen
+                  onSelectPassenger={() => handleRoleChange('rider')}
+                  onSelectDriverRegister={() => handleRoleChange('driver_signup')}
+                  onSelectDriverSignIn={() => handleRoleChange('driver_signin')}
+                />
+              </KerbMobileFrame>
+            )}
 
         {/* ============================================================== */}
         {/* 1. RIDER APP (Mobile 360 x 800 Frame on Desktop, Edge-to-Edge on Mobile) */}
@@ -386,6 +400,9 @@ export default function App() {
               />
             </div>
           </div>
+        )}
+
+          </>
         )}
 
         </Suspense>
